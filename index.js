@@ -1,5 +1,5 @@
 import express from "express";
-import { ler } from "./src/aluno.js";
+import { ler, inserir, lerUm, atualizar } from "./src/aluno.js";
 const app = express();
 const porta = 3000;
 /* Configurando suporte ao formato JSON */
@@ -19,11 +19,17 @@ app.get('/alunos', (req, res) => {
 });
 /* Rota (endpoint) para exibir um único aluno */
 app.get('/alunos/:id', (req, res) => {
-    res.send("Exibindo dados de um aluno.");
+    /* res.send("Exibindo dados de um aluno."); */
+    const id = parseInt(req.params.id);
+    lerUm(id, res);
 });
 /* Rota (endpoint) para INSERIR aluno */
 app.post('/alunos', (req, res) => {
-    res.send("Inserindo alunos");
+    /* res.send("Inserindo alunos"); */
+    /* capturando os dados a partir do corpo da requisição */
+    const novoAluno = req.body;
+    /* executando a função inserir e passando os parâmetros novoAluno e res */
+    inserir(novoAluno,res);
 });
 /* Rota (endpoint) para atualizar TODOS os dados do aluno */
 app.put('/alunos/:id', (req, res) => {
@@ -31,7 +37,11 @@ app.put('/alunos/:id', (req, res) => {
 });
 /* Rota (endpoint) para excluir um único aluno */
 app.patch('/alunos/:id', (req, res) => {
-    res.send("Atualiza ALGUNS/todos os dados de um aluno");
+    /* res.send("Atualiza ALGUNS/todos os dados de um aluno"); */
+    const id = parseInt(req.params.id);
+    const aluno = req.body;
+    atualizar(id, aluno, res);
+
 });
 /* Rota (endpoint) para EXCLUIR aluno */
 app.delete('/alunos/:id', (req, res) => {
