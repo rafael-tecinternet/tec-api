@@ -69,8 +69,8 @@ function excluir(id, res){
         if(erro){
             res.status(400).json(erro.code);
         } else {
-            res.status(2000000000000054)
-        }
-    })
+            res.status(200).json({"status" : "aluno excluído", id});
+        };
+    });
 }
 export {ler, inserir, lerUm, atualizar, excluir};
