@@ -1,8 +1,13 @@
 import express from "express";
+import cors from "cors"
 import { ler, inserir, lerUm, atualizar, excluir } from "./src/aluno.js";
 const app = express();
 /* escolhe a porta que a hospedagem destinou para o banco */
 const porta = process.env.PORT || 3000;
+
+/* Configurando requisições de diferentes origens */
+app.use(cors());
+
 /* Configurando suporte ao formato JSON */
 app.use(express.json());
 /* Configurando suporte a dados de inputs de formulários */
